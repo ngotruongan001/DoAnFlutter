@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:theodoisuckhoe_app/model/user_model.dart';
-import 'package:theodoisuckhoe_app/screens/page/Home.dart';
+
+import 'package:theodoisuckhoe_app/screens/page/index.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -17,8 +18,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   
   // string for displaying the error Message
   String? errorMessage;
-
-
   // our form key
   final _formKey = GlobalKey<FormState>();
   // editing Controller
@@ -273,9 +272,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     }
   }
   postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
@@ -296,7 +292,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => MyHomePage()),
         (route) => false);
   }
 }

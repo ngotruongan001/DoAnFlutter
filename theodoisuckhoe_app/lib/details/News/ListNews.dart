@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/_viewmodel_provider.dart';
 import 'package:theodoisuckhoe_app/viewmodel/ViewModel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListNews extends StatefulWidget {
   const ListNews({Key? key}) : super(key: key);
@@ -11,6 +12,15 @@ class ListNews extends StatefulWidget {
 
 class _ListNewsState extends State<ListNews> {
   var url ="https://baomoi.com/api/v1/content/get/list-by-custom?listType=tag&keyword=api&page=2&ctime=1640162465&version=0.1.92&sig=e7ae0d4ac0a6830f42d8f8583b782f39bbf8891277b33c6fafc69ea37455dfad&apiKey=kI44ARvPwaqL7v0KuDSM0rGORtdY1nnw";
+  Future<void>? _launched;
+
+  Future<void> _launchInBrowser(String url) async {
+    await launch(
+      url,
+      forceSafariVC: false,
+      forceWebView: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,36 +56,41 @@ class _ListNewsState extends State<ListNews> {
                 if(index < 5){
                   return Container();
                 }else{
-                  return Container(
-                    height: 100,
-                    margin: EdgeInsets.only(top: 15.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                              image: NetworkImage(model.newsItems[index].image),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(left: 10),
-                            child: Text(
-                              model.newsItems[index].title,
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500
+                  return GestureDetector(
+                    onTap: (){
+                      _launched = _launchInBrowser('https://baomoi.com${model.newsItems[index].link}');
+                    },
+                    child: Container(
+                      height: 100,
+                      margin: EdgeInsets.only(top: 15.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                image: NetworkImage(model.newsItems[index].image),
+                                fit: BoxFit.fill,
                               ),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
                             ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Text(
+                                model.newsItems[index].title,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }

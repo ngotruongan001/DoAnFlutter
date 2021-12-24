@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black54
                             ),
                           ),
-                          Text("${loggedInUser.secondName}${loggedInUser.firstName} ",
+                          Text("${loggedInUser.secondName} ${loggedInUser.firstName} ",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,

@@ -13,44 +13,46 @@ class _WrraperNewsState extends State<WrraperNews> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Tin tức hôm nay",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>  NewsPage("Tin tức hôm nay"),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "Tất cả",
+      child: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Tin tức hôm nay",
                     style: TextStyle(
-                        fontSize: 16,
-                        // fontWeight: FontWeight.bold,
-                        color: Colors.blue
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>  NewsPage("Tin tức hôm nay"),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Tất cả",
+                      style: TextStyle(
+                          fontSize: 16,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.blue
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          ListViewNews(),
+            ListViewNews(),
 
-        ],
+          ],
+        ),
       ),
     );
   }

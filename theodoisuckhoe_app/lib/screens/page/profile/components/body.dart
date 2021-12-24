@@ -39,7 +39,7 @@ class _BodyState extends State<Body> {
           ProfilePic(),
           Container(
             margin: EdgeInsets.only(top: 15),
-            child: Text("${loggedInUser.secondName}${loggedInUser.firstName} ",
+            child: Text("${loggedInUser.secondName} ${loggedInUser.firstName} ",
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
