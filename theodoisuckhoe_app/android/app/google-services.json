@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "300574584202",
+    "project_id": "health-app-eed3c",
+    "storage_bucket": "health-app-eed3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300574584202:android:e0ca7c98207b9360c12c73",
+        "android_client_info": {
+          "package_name": "com.example.theodoisuckhoe_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300574584202-om3do25d4u1sljmovk7in782ikmoj7q4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.theodoisuckhoe_app",
+            "certificate_hash": "98e537eee34b9124529b3679d9dcae4f962eaad1"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-v4WO-wZ2bwwNWH7f92WhoYKtZzeqBCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
