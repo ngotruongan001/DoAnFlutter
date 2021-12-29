@@ -50,7 +50,6 @@ class _WrraperNewsState extends State<WrraperNews> {
               ),
             ),
             ListViewNews(),
-
           ],
         ),
       ),

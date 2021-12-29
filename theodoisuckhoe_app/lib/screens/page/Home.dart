@@ -98,6 +98,8 @@ class _HomePageState extends State<HomePage> {
                     height: 320,
                     margin: EdgeInsets.only(top: 15),
                     child: GridView(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
                         children: _features.map((e) => FeatureItem(e.title, e.icon, e.color)).toList(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
