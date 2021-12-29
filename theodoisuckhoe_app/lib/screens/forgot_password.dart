@@ -56,7 +56,7 @@ class _LoginScreenState extends State<ForgotPassword> {
     final forgotButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
+      color: Colors.lightGreen,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -93,6 +93,14 @@ class _LoginScreenState extends State<ForgotPassword> {
                           "assets/logo.png",
                           fit: BoxFit.contain,
                         )),
+                    Container(
+                      child: Text('THEO DÕI SỨC KHOẺ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),),
+                    ),
                     SizedBox(height: 45),
                     emailField,
                     SizedBox(height: 20),

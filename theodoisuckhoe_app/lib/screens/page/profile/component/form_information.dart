@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:theodoisuckhoe_app/screens/page/profile/component/create_profile.dart';
+import 'package:theodoisuckhoe_app/screens/page/profile/models/user_profile.dart';
 
 class Dmc extends StatefulWidget {
   @override
@@ -10,7 +14,22 @@ class Dmc extends StatefulWidget {
 class _DmcState extends State<Dmc> {
   final _formKey = GlobalKey<FormState>();
 
+  User? user = FirebaseAuth.instance.currentUser;
+  UserProfileModel loggedInUser = UserProfileModel();
+
   @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("profileUsers")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserProfileModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -26,20 +45,25 @@ class _DmcState extends State<Dmc> {
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter some text Password should contain more than 5 characters&& ";
-                      }
-                      return (value != null && value.contains('@'))
-                          ? 'Do not use the @ char.'
-                          : null;
-                    },
-                    decoration: InputDecoration(
-                        errorMaxLines: 3,
-                        labelText: "Họ tên",
-                        labelStyle:
-                            TextStyle(color: Colors.black, fontSize: 15)),
+                  Column(
+                      children: [
+                        if(loggedInUser.fullName == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ))
+
+                        ,
+                        if(loggedInUser.fullName != null)
+                          Text("${loggedInUser.fullName} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              )),
+                      ]
                   ),
                 ],
               ),
@@ -49,40 +73,25 @@ class _DmcState extends State<Dmc> {
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  TextFormField(
-                    validator: (value) {
-                      RegExp regExp = new RegExp(
-                        r"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$",
-                        caseSensitive: true,
-                        multiLine: false,
-                      );
-                      int ageCalculate(String input) {
-                        if (regExp.hasMatch(input)) {
-                          DateTime _dateTime = DateTime(
-                            int.parse(input.substring(6)),
-                            int.parse(input.substring(3, 5)),
-                            int.parse(input.substring(0, 2)),
-                          );
-                          return DateTime.fromMillisecondsSinceEpoch(
-                                      DateTime.now()
-                                          .difference(_dateTime)
-                                          .inMilliseconds)
-                                  .year -
-                              1970;
-                        } else {
-                          return -1;
-                        }
-                      }
-                    },
-                    style: TextStyle(fontSize: 18, color: Colors.black),
-                    decoration: InputDecoration(
-                        suffixIcon: Icon(
-                          Icons.calendar_today_outlined,
-                          color: Colors.black,
-                        ),
-                        labelText: "Ngày Sinh",
-                        labelStyle:
-                            TextStyle(color: Colors.black, fontSize: 15)),
+                  Column(
+                      children: [
+                        if(loggedInUser.date == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ))
+
+                        ,
+                        if(loggedInUser.date != null)
+                          Text("${loggedInUser.date} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              )),
+                      ]
                   ),
                 ],
               ),
@@ -92,24 +101,86 @@ class _DmcState extends State<Dmc> {
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter some text Password should contain more than 5 characters&& ";
-                      }
-                      return (value != null && value.contains('@'))
-                          ? 'Do not use the @ char.'
-                          : null;
-                    },
-                    decoration: InputDecoration(
-                        suffixIcon: Icon(
-                          Icons.phone_android_outlined,
-                          color: Colors.black,
-                        ),
-                        errorMaxLines: 3,
-                        labelText: "Số điện thoại",
-                        labelStyle:
-                            TextStyle(color: Colors.black, fontSize: 15)),
+                  Column(
+                    children: [
+                      if(loggedInUser.phone == null)
+                        Text("Chưa cập nhật...",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ))
+
+                      ,
+                      if(loggedInUser.phone != null)
+                      Text("${loggedInUser.phone} ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          )),
+                    ]
+                  ),
+
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Stack(
+                alignment: AlignmentDirectional.centerEnd,
+                children: <Widget>[
+
+                  Column(
+                      children: [
+                        if(loggedInUser.cmnd == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ))
+
+                        ,
+                        if(loggedInUser.cmnd != null)
+                          Text("${loggedInUser.cmnd} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              )),
+                      ]
+                  ),
+
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Stack(
+                alignment: AlignmentDirectional.centerEnd,
+                children: <Widget>[
+                  Column(
+                      children: [
+                        if(loggedInUser.email == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ))
+
+                        ,
+                        if(loggedInUser.email != null)
+                          Text("${loggedInUser.email} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              )),
+                      ]
                   ),
                 ],
               ),
@@ -119,74 +190,25 @@ class _DmcState extends State<Dmc> {
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter some text Password should contain more than 5 characters&& ";
-                      }
-                      return (value != null && value.contains('@'))
-                          ? 'Do not use the @ char.'
-                          : null;
-                    },
-                    decoration: InputDecoration(
-                        errorMaxLines: 3,
-                        labelText: "Số hộ chiếu CMND/CCCD*",
-                        labelStyle:
-                            TextStyle(color: Colors.black, fontSize: 15)),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Stack(
-                alignment: AlignmentDirectional.centerEnd,
-                children: <Widget>[
-                  TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter some text Password should contain more than 5 characters&& ";
-                      }
-                      return (value != null && value.contains('@'))
-                          ? 'Do not use the @ char.'
-                          : null;
-                    },
-                    decoration: InputDecoration(
-                        suffixIcon: Icon(
-                          Icons.email_outlined,
-                          color: Colors.black,
-                        ),
-                        errorMaxLines: 3,
-                        labelText: "email",
-                        labelStyle:
-                            TextStyle(color: Colors.black, fontSize: 15)),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Stack(
-                alignment: AlignmentDirectional.centerEnd,
-                children: <Widget>[
-                  TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter some text Password should contain more than 5 characters&& ";
-                      }
-                      return (value != null && value.contains('@'))
-                          ? 'Do not use the @ char.'
-                          : null;
-                    },
-                    decoration: InputDecoration(
-                        suffixIcon: Icon(
-                          Icons.add_location,
-                          color: Colors.black,
-                        ),
-                        errorMaxLines: 3,
-                        labelText: "Địa chỉ",
-                        labelStyle:
-                            TextStyle(color: Colors.black, fontSize: 15)),
+                  Column(
+                      children: [
+                        if(loggedInUser.address == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ))
+
+                        ,
+                        if(loggedInUser.address != null)
+                          Text("${loggedInUser.address} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              )),
+                      ]
                   ),
                 ],
               ),
@@ -194,19 +216,22 @@ class _DmcState extends State<Dmc> {
             const SizedBox(height: 10),
             GFButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
-                }
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text('Đang xử lí')));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const CreateProflieScreen()));
               },
-              text: "Lưu thông tin",
+              text: "Sửa thông tin",
               blockButton: true,
               size: GFSize.LARGE,
               textColor: Colors.white,
               shape: GFButtonShape.pills,
+              textStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+
+              ),
+
             ),
           ],
         ),

@@ -33,6 +33,15 @@ dependencies:
   http: ^0.13.4
   provider_architecture:
   getwidget: ^2.0.4
+  get_it:
+  firebase_storage:
+  image_picker:
+  image_cropper:
+  path_provider:
+  flutter_image_compress:
+  font_awesome_flutter:
+
+
 
 
 

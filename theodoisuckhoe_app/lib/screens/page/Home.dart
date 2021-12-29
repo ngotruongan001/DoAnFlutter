@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
                         )
                     ),
                   ),
+
                   Padding(
                       padding:  EdgeInsets.only(left: 20),
                       child: Column(

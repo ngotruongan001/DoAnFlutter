@@ -166,7 +166,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final signUpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
+      color: Colors.lightGreen,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -212,6 +212,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           "assets/logo.png",
                           fit: BoxFit.contain,
                         )),
+                    Container(
+                      child: Text('THEO DÕI SỨC KHOẺ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),),
+                    ),
                     SizedBox(height: 45),
                     firstNameField,
                     SizedBox(height: 20),
@@ -288,7 +296,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
+    Fluttertoast.showToast(msg: "Tài khoản đã tạo thành công");
 
     Navigator.pushAndRemoveUntil(
         (context),

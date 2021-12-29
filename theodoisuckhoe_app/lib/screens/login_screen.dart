@@ -2,16 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:theodoisuckhoe_app/auth/auth_service.dart';
 import 'package:theodoisuckhoe_app/auth/google_login_controller.dart';
 import 'package:theodoisuckhoe_app/screens/forgot_password.dart';
-import 'package:theodoisuckhoe_app/screens/page/Home.dart';
 import 'package:theodoisuckhoe_app/screens/page/index.dart';
 import 'package:theodoisuckhoe_app/screens/registration_screen.dart';
 import 'package:theodoisuckhoe_app/screens/social_icon.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -26,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // firebase
   final _auth = FirebaseAuth.instance;
-  
+  AuthClass authClass = AuthClass();
   // string for displaying the error Message
   String? errorMessage;
 
@@ -91,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
+      color: Colors.lightGreen,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -126,6 +125,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           "assets/logo.png",
                           fit: BoxFit.contain,
                         )),
+                    Container(
+                      child: Text('THEO DÕI SỨC KHOẺ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),),
+                    ),
                     SizedBox(height: 45),
                     emailField,
                     SizedBox(height: 25),
@@ -182,19 +189,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         SocalIcon(
                           iconSrc: "assets/icons/facebook.svg",
                           press: () {
-                            Provider.of<GoogleSignInController>(context, listen: false).login();
-                            print('abc');
                           },
                         ),
                         SocalIcon(
                           iconSrc: "assets/icons/twitter.svg",
                           press: () {
-                            print('abc');
                           },
                         ),
                         SocalIcon(
                           iconSrc: "assets/icons/google-plus.svg",
-                          press: () {},
+                          press: () {
+                            Provider.of<GoogleSignInController>(context, listen: false).login(context);
+
+                          },
                         ),
                       ],
                     )

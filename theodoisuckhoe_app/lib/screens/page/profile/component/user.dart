@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theodoisuckhoe_app/screens/page/profile/component/form_information.dart';
 import 'package:theodoisuckhoe_app/screens/page/profile/components/profile_pic.dart';
+import 'package:theodoisuckhoe_app/screens/page/profile/components/user_image.dart';
 
 class Users extends StatefulWidget {
   const Users({Key? key}) : super(key: key);
@@ -54,6 +55,7 @@ class _UsersState extends State<Users> {
                 ),
               ),
               Container(
+                height: 700,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -65,6 +67,7 @@ class _UsersState extends State<Users> {
                       SizedBox(
                         height: 30,
                       ),
+                      UserImage(onFileChanged: (String imageUrl) {  },),
                       ProfilePic(),
                       Dmc(),
                     ],
