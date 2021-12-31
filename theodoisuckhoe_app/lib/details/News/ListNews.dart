@@ -48,49 +48,49 @@ class _ListNewsState extends State<ListNews> {
             model.getNewsData(url);
           },
           builder: (context, model, child) => Container(
-            margin: EdgeInsets.only(left: 10.0, right: 10.0),
-            child:  model.newsItems.length == 0
-                ?Container(child: Center(child: Text("Loading...", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22.0),)))
-                : Column(
-                      children: model.newsItems
-                          .map((e)=> GestureDetector(
-                        onTap: (){
-                          _launched = _launchInBrowser('https://baomoi.com${e.link}');
-                        },
-                        child: Container(
-                          height: 100,
-                          margin: EdgeInsets.only(top: 15.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                    image: NetworkImage(e.image),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
+              margin: EdgeInsets.only(left: 10.0, right: 10.0),
+              child:  model.newsItems.length == 0
+                  ?Container(child: Center(child: Text("Loading...", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22.0),)))
+                  : Column(
+                  children: model.newsItems
+                      .map((e)=> GestureDetector(
+                    onTap: (){
+                      _launched = _launchInBrowser('https://baomoi.com${e.link}');
+                    },
+                    child: Container(
+                      height: 100,
+                      margin: EdgeInsets.only(top: 15.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                image: NetworkImage(e.image),
+                                fit: BoxFit.fill,
                               ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: Text(
-                                    e.title,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      )).toList()
-                    )
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Text(
+                                e.title,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )).toList()
+              )
           ),
         ),
       ],

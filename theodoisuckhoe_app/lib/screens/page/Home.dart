@@ -5,7 +5,6 @@ import 'package:theodoisuckhoe_app/details/FeatureItem.dart';
 import 'package:theodoisuckhoe_app/details/WrraperNews.dart';
 import 'package:theodoisuckhoe_app/details/card.dart';
 import 'package:theodoisuckhoe_app/model/user_model.dart';
-import 'package:theodoisuckhoe_app/screens/page/profile/models/user_profile.dart';
 import 'package:theodoisuckhoe_app/viewmodel/list_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,39 +18,21 @@ class _HomePageState extends State<HomePage> {
   List _cards = ListCards.getListCard();
   List _features = ListCards.getListFeature();
 
-  User? user1 = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser1 = UserModel();
-
   User? user = FirebaseAuth.instance.currentUser;
-  UserProfileModel loggedInUser = UserProfileModel();
-
+  UserModel loggedInUser = UserModel();
 
   @override
   void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection("profileUsers")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      this.loggedInUser = UserProfileModel.fromMap(value.data());
-      setState(() {});
-    });
-  }
-
-  void initState1() {
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.loggedInUser1 = UserModel.fromMap(value.data());
+      this.loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
     });
   }
-
-
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
@@ -86,20 +67,12 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black54
                             ),
                           ),
-                          if (loggedInUser.fullName == null)
-                            Text("${loggedInUser1.secondName} ${loggedInUser1.firstName} ",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                )),
-                          if (loggedInUser.fullName != null)
-                            Text("${loggedInUser.fullName}  ",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                )),
+                          Text("${loggedInUser.secondName} ${loggedInUser.firstName} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              )),
                         ],
                       )
                   )
@@ -132,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisCount: 3,
                           crossAxisSpacing: 20,
                           mainAxisSpacing: 20,
+
                         )
                     ),
                   ),

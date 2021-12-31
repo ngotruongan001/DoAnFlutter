@@ -18,32 +18,19 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
 
-  User? user1 = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser1 = UserModel();
-
   User? user = FirebaseAuth.instance.currentUser;
-  UserProfileModel loggedInUser = UserProfileModel();
-  @override
-  void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection("profileUsers")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      this.loggedInUser = UserProfileModel.fromMap(value.data());
-      setState(() {});
-    });
-  }
+  UserModel loggedInUser = UserModel();
 
-  void initState1() {
+  @override
+
+  void initState() {
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.loggedInUser1 = UserModel.fromMap(value.data());
+      this.loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
     });
   }
@@ -57,27 +44,13 @@ class _BodyState extends State<Body> {
           Container(
             margin: EdgeInsets.only(top: 15),
             child:
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (loggedInUser.fullName == null)
-                  Text("${loggedInUser1.secondName} ${loggedInUser1.firstName} ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      )),
-                  if (loggedInUser.fullName != null)
-                    Text("${loggedInUser.fullName}  ",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        )),
-                ]
-              ),
-            ),
-
+            Text("${loggedInUser.secondName} ${loggedInUser.firstName} ",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                )),
+          ),
           SizedBox(height: 20),
           ProfileMenu(
             text: "Thông tin cá nhân",
