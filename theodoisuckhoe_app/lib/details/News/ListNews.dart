@@ -29,13 +29,16 @@ class _ListNewsState extends State<ListNews> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "Tin tức thêm",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24.0
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Tin tức thêm",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24.0
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
             ),
           ],
         ),
@@ -48,54 +51,46 @@ class _ListNewsState extends State<ListNews> {
             margin: EdgeInsets.only(left: 10.0, right: 10.0),
             child:  model.newsItems.length == 0
                 ?Container(child: Center(child: Text("Loading...", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22.0),)))
-                :new ListView.builder(
-              itemCount: model.newsItems.length,
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                if(index < 5){
-                  return Container();
-                }else{
-                  return GestureDetector(
-                    onTap: (){
-                      _launched = _launchInBrowser('https://baomoi.com${model.newsItems[index].link}');
-                    },
-                    child: Container(
-                      height: 100,
-                      margin: EdgeInsets.only(top: 15.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                image: NetworkImage(model.newsItems[index].image),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(left: 10),
-                              child: Text(
-                                model.newsItems[index].title,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500
+                : Column(
+                      children: model.newsItems
+                          .map((e)=> GestureDetector(
+                        onTap: (){
+                          _launched = _launchInBrowser('https://baomoi.com${e.link}');
+                        },
+                        child: Container(
+                          height: 100,
+                          margin: EdgeInsets.only(top: 15.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    image: NetworkImage(e.image),
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
                               ),
-                            ),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    e.title,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
+                        ),
+                      )).toList()
+                    )
           ),
         ),
       ],
