@@ -67,7 +67,7 @@ class _UsersState extends State<Users> {
                       SizedBox(
                         height: 30,
                       ),
-                      UserImage(onFileChanged: (String imageUrl) {  },),
+                      // UserImage(onFileChanged: (String imageUrl) {  },),
                       ProfilePic(),
                       Dmc(),
                     ],

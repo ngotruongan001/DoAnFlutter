@@ -23,3 +23,4 @@ class GoogleSignInController with ChangeNotifier {
     notifyListeners();
   }
 }
+

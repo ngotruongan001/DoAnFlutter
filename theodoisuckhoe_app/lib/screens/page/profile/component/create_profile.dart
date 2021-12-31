@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:theodoisuckhoe_app/screens/page/index.dart';
-import 'package:theodoisuckhoe_app/screens/page/profile/components/profile_pic.dart';
+import 'package:theodoisuckhoe_app/screens/page/profile/components/user_image.dart';
 import 'package:theodoisuckhoe_app/screens/page/profile/models/user_profile.dart';
 
 class CreateProflieScreen extends StatefulWidget {
@@ -252,7 +252,7 @@ class _CreateProflieScreenState extends State<CreateProflieScreen> {
 
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                ProfilePic(),
+                                UserImage(onFileChanged: (String imageUrl) {  },),
                                 SizedBox(height: 35),
                                 fullNameField,
                                 SizedBox(height: 20),

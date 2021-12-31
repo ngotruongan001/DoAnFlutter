@@ -17,6 +17,8 @@ class _DmcState extends State<Dmc> {
   User? user = FirebaseAuth.instance.currentUser;
   UserProfileModel loggedInUser = UserProfileModel();
 
+
+
   @override
   void initState() {
     super.initState();
@@ -41,30 +43,39 @@ class _DmcState extends State<Dmc> {
           children: <Widget>[
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  Column(
+                  Column(children: [
+                    Row(
                       children: [
-                        if(loggedInUser.fullName == null)
+                         Container(
+                            margin: const EdgeInsets.only(right: 10, left: 30),
+                            child: Text("Họ và tên:",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                )),
+                          ),
+                        if (loggedInUser.fullName == null)
                           Text("Chưa cập nhật...",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ))
-
-                        ,
-                        if(loggedInUser.fullName != null)
+                                fontWeight: FontWeight.normal,
+                                fontSize: 18,
+                              )),
+                        if (loggedInUser.fullName != null)
                           Text("${loggedInUser.fullName} ",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
                               )),
-                      ]
-                  ),
+                      ],
+                    ),
+                  ]),
                 ],
               ),
             ),
@@ -73,153 +84,195 @@ class _DmcState extends State<Dmc> {
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  Column(
+                  Column(children: [
+                    Row(
                       children: [
-                        if(loggedInUser.date == null)
-                          Text("Chưa cập nhật...",
+                        Container(
+                          margin: const EdgeInsets.only(right: 10, left: 30),
+                          child: Text("Ngày sinh:",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                              ))
-
-                        ,
-                        if(loggedInUser.date != null)
+                              )),
+                        ),
+                        if (loggedInUser.date == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
+                              )),
+                        if (loggedInUser.date != null)
                           Text("${loggedInUser.date} ",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
                               )),
-                      ]
-                  ),
+                      ],
+                    ),
+                  ]),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  Column(
-                    children: [
-                      if(loggedInUser.phone == null)
-                        Text("Chưa cập nhật...",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ))
-
-                      ,
-                      if(loggedInUser.phone != null)
-                      Text("${loggedInUser.phone} ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          )),
-                    ]
-                  ),
-
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Stack(
-                alignment: AlignmentDirectional.centerEnd,
-                children: <Widget>[
-
-                  Column(
+                  Column(children: [
+                    Row(
                       children: [
-                        if(loggedInUser.cmnd == null)
-                          Text("Chưa cập nhật...",
+                        Container(
+                          margin: const EdgeInsets.only(right: 10, left: 30),
+                          child: Text("Điện thoại:",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                              ))
-
-                        ,
-                        if(loggedInUser.cmnd != null)
+                              )),
+                        ),
+                        if (loggedInUser.phone == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
+                              )),
+                        if (loggedInUser.phone != null)
+                          Text("${loggedInUser.phone} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
+                              )),
+                      ],
+                    ),
+                  ]),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: Stack(
+                alignment: AlignmentDirectional.centerEnd,
+                children: <Widget>[
+                  Column(children: [
+                    Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(right: 10, left: 30),
+                          child: Text("Số CMND:",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              )),
+                        ),
+                        if (loggedInUser.cmnd == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
+                              )),
+                        if (loggedInUser.cmnd != null)
                           Text("${loggedInUser.cmnd} ",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
                               )),
-                      ]
-                  ),
-
+                      ],
+                    ),
+                  ]),
                 ],
               ),
             ),
-
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  Column(
+                  Column(children: [
+                    Row(
                       children: [
-                        if(loggedInUser.email == null)
-                          Text("Chưa cập nhật...",
+                        Container(
+                          margin: const EdgeInsets.only(right: 10, left: 30),
+                          child: Text("Email:",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                              ))
-
-                        ,
-                        if(loggedInUser.email != null)
+                              )),
+                        ),
+                        if (loggedInUser.email == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
+                              )),
+                        if (loggedInUser.email != null)
                           Text("${loggedInUser.email} ",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
                               )),
-                      ]
-                  ),
+                      ],
+                    ),
+                  ]),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              padding: const EdgeInsets.fromLTRB(0, 10 , 0, 10),
               child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
-                  Column(
+                  Column(children: [
+                    Row(
                       children: [
-                        if(loggedInUser.address == null)
-                          Text("Chưa cập nhật...",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ))
-
-                        ,
-                        if(loggedInUser.address != null)
-                          Text("${loggedInUser.address} ",
+                        Container(
+                          margin: const EdgeInsets.only(right: 10, left: 30),
+                          child: Text("Địa chỉ:",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               )),
-                      ]
-                  ),
+                        ),
+                        if (loggedInUser.address == null)
+                          Text("Chưa cập nhật...",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
+                              )),
+                        if (loggedInUser.address != null)
+                          Text("${loggedInUser.address} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 19,
+                              )),
+                      ],
+                    ),
+                  ]),
                 ],
               ),
             ),
             const SizedBox(height: 10),
             GFButton(
               onPressed: () {
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   const SnackBar(content: Text('Đang xử lí')));
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const CreateProflieScreen()));
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   const SnackBar(content: Text('Đang xử lí')));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CreateProflieScreen()));
               },
               text: "Sửa thông tin",
               blockButton: true,
@@ -229,9 +282,7 @@ class _DmcState extends State<Dmc> {
               textStyle: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-
               ),
-
             ),
           ],
         ),

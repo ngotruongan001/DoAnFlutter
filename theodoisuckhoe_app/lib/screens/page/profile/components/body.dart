@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:theodoisuckhoe_app/model/user_model.dart';
 import 'package:theodoisuckhoe_app/screens/login_screen.dart';
 import 'package:theodoisuckhoe_app/screens/page/profile/component/user.dart';
+import 'package:theodoisuckhoe_app/screens/page/profile/models/user_profile.dart';
 
 import 'profile_menu.dart';
 import 'profile_pic.dart';
@@ -16,17 +17,33 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
+  User? user1 = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser1 = UserModel();
+
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  UserProfileModel loggedInUser = UserProfileModel();
   @override
   void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("profileUsers")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserProfileModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
+  void initState1() {
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
+      this.loggedInUser1 = UserModel.fromMap(value.data());
       setState(() {});
     });
   }
@@ -39,13 +56,28 @@ class _BodyState extends State<Body> {
           ProfilePic(),
           Container(
             margin: EdgeInsets.only(top: 15),
-            child: Text("${loggedInUser.secondName} ${loggedInUser.firstName} ",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                )),
-          ),
+            child:
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (loggedInUser.fullName == null)
+                  Text("${loggedInUser1.secondName} ${loggedInUser1.firstName} ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      )),
+                  if (loggedInUser.fullName != null)
+                    Text("${loggedInUser.fullName}  ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        )),
+                ]
+              ),
+            ),
+
           SizedBox(height: 20),
           ProfileMenu(
             text: "Thông tin cá nhân",
