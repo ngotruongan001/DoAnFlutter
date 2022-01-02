@@ -7,7 +7,8 @@ class FeatureItem extends StatefulWidget {
   var title;
   var icon;
   var color;
-  FeatureItem(this.title, this.icon, this.color);
+  var page;
+  FeatureItem(this.title, this.icon, this.color, this.page);
 
   @override
   _FeatureItemState createState() => _FeatureItemState();
@@ -22,7 +23,7 @@ class _FeatureItemState extends State<FeatureItem> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-              DetailsPage(widget.title)
+              DetailsPage(widget.title, widget.page)
           ),
         );
       },

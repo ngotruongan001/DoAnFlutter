@@ -5,6 +5,6 @@ class FeatureItem{
   var title;
   var icon;
   var color;
-
-  FeatureItem(@required this.id, @required this.title, @required this.icon, @required this.color);
+  var page;
+  FeatureItem(@required this.id, @required this.title, @required this.icon, @required this.color, @required this.page);
 }

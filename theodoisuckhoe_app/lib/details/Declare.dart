@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:theodoisuckhoe_app/details/screen_more/HealthDeclaration.dart';
 
 class Declare extends StatefulWidget {
   var title;
@@ -45,14 +46,7 @@ class _DeclareState extends State<Declare> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 300,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(40), topLeft: Radius.circular(40))
-                    ),
-                    child: Center(child: Text(widget.title)),
-                  )
+                  HealthDeclaration(widget.title),
                 ],
               ),
             ),

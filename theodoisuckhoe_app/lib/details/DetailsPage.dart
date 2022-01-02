@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
   var title;
-  DetailsPage(this.title){}
+  var page;
+  DetailsPage(this.title,this.page){}
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -47,12 +48,11 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                 ),
                 Container(
-                  height: 300,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(topRight: Radius.circular(40), topLeft: Radius.circular(40))
                   ),
-                  child: Center(child: Text("Chua co data")),
+                  child: widget.page,
                 )
               ],
             ),

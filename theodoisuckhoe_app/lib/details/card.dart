@@ -33,7 +33,7 @@ class _CardState extends State<CardItemScreen> {
             builder: (context) =>
                 widget.id == 1
                     ?Declare(widget.title)
-                    : widget.id == 2 ? ViewCovidPage(widget.title) : DetailsPage(widget.title)
+                    : widget.id == 2 ? ViewCovidPage(widget.title) : DetailsPage(widget.title, Center(child: Text("Khong co data")))
                 )
           );
       },

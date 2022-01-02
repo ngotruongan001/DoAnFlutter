@@ -97,16 +97,18 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 320,
                     margin: EdgeInsets.only(top: 15),
-                    child: GridView(
+                    child: GridView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        children: _features.map((e) => FeatureItem(e.title, e.icon, e.color)).toList(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           crossAxisSpacing: 20,
                           mainAxisSpacing: 20,
-
-                        )
+                        ),
+                      itemCount: 6,
+                      itemBuilder: (BuildContext context, int index) {
+                        return FeatureItem(_features[index].title, _features[index].icon, _features[index].color, _features[index].page);
+                      },
                     ),
                   ),
                   WrraperNews(),
