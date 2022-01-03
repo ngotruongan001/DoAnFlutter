@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today_outlined),
-            label: 'Lịch hẹn',
+            label: 'Ghi chú',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_alert),

@@ -98,13 +98,13 @@ class _HomePageState extends State<HomePage> {
                     height: 320,
                     margin: EdgeInsets.only(top: 15),
                     child: GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                        ),
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                      ),
                       itemCount: 6,
                       itemBuilder: (BuildContext context, int index) {
                         return FeatureItem(_features[index].title, _features[index].icon, _features[index].color, _features[index].page);
