@@ -14,7 +14,10 @@ class _BMIPageState extends State<BMIPage> {
   int? _weight = 0;
   int? _meter = 0;
   int? _cent = 0;
+  int? _age = 0;
   var _bmi = 0.0;
+
+  var currentindex = 0;
 
   void _changText(){
     String? text;
@@ -65,20 +68,20 @@ class _BMIPageState extends State<BMIPage> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             SizedBox(height: 20,),
-            Text(
-                "BMI",
-                style: TextStyle(
-                  fontSize: 26, fontWeight: FontWeight.bold,
-                )
+            Row(
+              children: [
+                radioButton("Man",Colors.blue, 0),
+                radioButton("Woman",Colors.pink, 1),
+              ],
+
             ),
             SizedBox(height: 35,),
-            Column(
+            Row(
               children: [
                 Column(
                   children: [
@@ -95,45 +98,96 @@ class _BMIPageState extends State<BMIPage> {
                         )
                       ],
                     ),
-                    SizedBox(height: 10,),
                     Row(
                       children: [
                         Container(
                           width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              autofocus: true,
-                              maxLines: 1,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
-                                keyboardType: TextInputType.number,
-                              style: TextStyle(
+                          child: TextField(
+                            maxLines: 1,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(
                                 fontSize: 14
-                              ),
-                              decoration: InputDecoration(
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.lightBlue, width: 1.0),
-                                ),
-                                labelText: 'cân nặng',
-                              ),
-                              onChanged: (value)  {
-                                int? i;
-                                if(value == ''){
-                                  i = 0;
-                                }
-                                else{
-                                  i = int.parse(value);
-                                }
-                                setState(() {
-                                  _weight = i;
-                                });
-                                print(_weight);
-                              },
                             ),
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.lightBlue, width: 1.0),
+                              ),
+                              labelText: 'cân nặng',
+                            ),
+                            onChanged: (value)  {
+                              int? i;
+                              if(value == ''){
+                                i = 0;
+                              }
+                              else{
+                                i = int.parse(value);
+                              }
+                              setState(() {
+                                _weight = i;
+                              });
+                              print(_weight);
+                            },
+                          ),
                         ),
                       ],
                     ),
-
+                  ],
+                ),
+                SizedBox(width: 10.0,),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Lứa tuổi",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.lightBlueAccent,
+                          ),
+                          textAlign: TextAlign.left,
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: TextField(
+                            maxLines: 1,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(
+                                fontSize: 14
+                            ),
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.lightBlue, width: 1.0),
+                              ),
+                              labelText: '19',
+                            ),
+                            onChanged: (value)  {
+                              int? i;
+                              if(value == ''){
+                                i = 0;
+                              }
+                              else{
+                                i = int.parse(value);
+                              }
+                              setState(() {
+                                _age = i;
+                              });
+                              print(_age);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -162,7 +216,7 @@ class _BMIPageState extends State<BMIPage> {
                         Row(
                           children: [
                             Text(
-                              "",
+                              "centimeter",
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.lightBlueAccent,
@@ -174,7 +228,6 @@ class _BMIPageState extends State<BMIPage> {
                         Container(
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: TextField(
-                            autofocus: true,
                             maxLines: 1,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
@@ -225,7 +278,6 @@ class _BMIPageState extends State<BMIPage> {
                         Container(
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: TextField(
-                            autofocus: true,
                             maxLines: 1,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
@@ -264,6 +316,7 @@ class _BMIPageState extends State<BMIPage> {
             ),
             SizedBox(height: 35,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: ()=> {
@@ -299,13 +352,13 @@ class _BMIPageState extends State<BMIPage> {
                 SizedBox(height: 20,),
                 Row(
                   children: [
-                    _bmi == 0 ? Text(""):
                     Text(
-                      txt.toString() + " : " +_bmi.toStringAsFixed(1).toString(),
+                      txt.toString() + (_bmi == 0 ? "" : " : " +_bmi.toStringAsFixed(1).toString()),
                       style: TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.w400,
-                          color:_bmi < 25? Colors.green
-                              :_bmi == 25 ?Colors.yellow: Colors.red
+                          color:_bmi < 18.5 ?Colors.yellow
+                                :_bmi <= 25? Colors.green
+                                  : Colors.red
                       ),
                     ),
                   ],
@@ -314,6 +367,31 @@ class _BMIPageState extends State<BMIPage> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget radioButton(String value, Color color, int index){
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 12.0),
+        height: 80.0,
+        child: FlatButton(
+          color: currentindex == index ?  color : Colors.grey[200],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0)
+          ),
+          onPressed: () {
+            setState(() {
+              currentindex = index;
+            });
+            },
+          child: Text(value, style: TextStyle(
+            color: currentindex == index ? Colors.white : color,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold
+          ),)
+        )
       ),
     );
   }
