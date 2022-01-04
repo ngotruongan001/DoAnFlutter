@@ -170,7 +170,6 @@ class _HealthDeclarationState extends State<HealthDeclaration> {
                         ),
                       ),
                     ),
-
                   ],
                 )
               ],

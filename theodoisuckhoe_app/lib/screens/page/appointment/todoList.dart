@@ -59,14 +59,13 @@ class _ToDoListState extends State<ToDoList> {
       body: Padding(
         padding: EdgeInsets.all(10.0),
         child: ListView.builder(
-          
+            shrinkWrap: true,
             itemCount: todos.length,
             itemBuilder: (BuildContext context,int index){
               return Dismissible(
                 key: Key(todos[index]),
                 child: Card(
                   color: Color(0xFF00CCFF).withOpacity(0.7),
-
                   margin: EdgeInsets.all(8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)

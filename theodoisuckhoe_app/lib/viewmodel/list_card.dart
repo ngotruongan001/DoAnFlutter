@@ -1,3 +1,5 @@
+import 'package:theodoisuckhoe_app/details/screen_more/BMIPage.dart';
+
 import '../model/CardItem.dart';
 import 'package:flutter/material.dart';
 import '../model/FeatureItem.dart';
@@ -15,10 +17,10 @@ class ListCards {
     return [
       new FeatureItem(
           1,
-          "Phản ứng sau tiêm",
+          "Tính BMI",
           Icons.ac_unit_outlined,
           Color(0xFF3366FF),
-          Center(child: Text("Khong co data"))
+          BMIPage()
       ),
       new FeatureItem(
           2,
