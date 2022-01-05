@@ -66,6 +66,7 @@ class _ToDoListState extends State<ToDoList> {
                 key: Key(todos[index]),
                 child: Card(
                   color: Color(0xFF00CCFF).withOpacity(0.7),
+
                   margin: EdgeInsets.all(8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)

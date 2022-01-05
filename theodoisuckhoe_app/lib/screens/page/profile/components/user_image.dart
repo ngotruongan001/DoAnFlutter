@@ -1,5 +1,9 @@
 import 'dart:io';
-
+import 'package:theodoisuckhoe_app/model/user_model.dart';
+import 'package:theodoisuckhoe_app/screens/page/profile/models/user_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -24,6 +28,9 @@ class _UserImageState extends State<UserImage> {
   final ImagePicker _picker = ImagePicker();
 
   String? imageUrl;
+  final imageEditingController = new TextEditingController();
+  String? urlImg;
+  final urlEditingController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,8 @@ class _UserImageState extends State<UserImage> {
             onTap: () => _selectPhoto(),
             child: AppRoundImage.url(
               imageUrl!,
-              width: 80,
-              height: 80,
+              width: 110,
+              height: 110,
             ),
           ),
         InkWell(
@@ -95,7 +102,7 @@ class _UserImageState extends State<UserImage> {
 
   Future _pickImage(ImageSource source) async {
     final pickedFile =
-        await _picker.pickImage(source: source, imageQuality: 100);
+        await _picker.pickImage(source: source, imageQuality: 40);
     if (pickedFile == null) {
       return;
     }
@@ -107,7 +114,7 @@ class _UserImageState extends State<UserImage> {
       return;
     }
 
-    file = await compressImagePath(file.path, 100);
+    file = await compressImagePath(file.path, 40);
 
     await _uploadFile(file.path);
   }
@@ -126,6 +133,12 @@ class _UserImageState extends State<UserImage> {
   }
 
   Future _uploadFile(String path) async {
+    UserProfileModel userProfileModel = UserProfileModel();
+    userProfileModel.image = imageEditingController.text;
+
+    UserModel userModel = UserModel();
+    userModel.urlImg = urlEditingController.text;
+
     final ref = storage.FirebaseStorage.instance
         .ref()
         .child('images')
@@ -134,10 +147,22 @@ class _UserImageState extends State<UserImage> {
     final result = await ref.putFile(File(path));
     final fileUrl = await result.ref.getDownloadURL();
 
+    userProfileModel.image = fileUrl;
+     await FirebaseFirestore.instance.collection("profileUsers")
+         .doc(FirebaseAuth.instance.currentUser!.uid)
+         .update(userProfileModel.toMap1());
+
+    userModel.urlImg = fileUrl;
+    await FirebaseFirestore.instance.collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update(userModel.toMap2());
+
     setState(() {
       imageUrl = fileUrl;
     });
 
     widget.onFileChanged(fileUrl);
   }
+
+
 }

@@ -40,6 +40,7 @@ dependencies:
   path_provider:
   flutter_image_compress:
   font_awesome_flutter:
+  cached_network_image: ^3.2.0
 
 
 

@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
   Widget build(BuildContext context) {
+    var urlImage1; urlImage1= loggedInUser.urlImg;
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
@@ -42,17 +43,28 @@ class _HomePageState extends State<HomePage> {
               margin:  EdgeInsets.only(left: 16, right: 16, top: 16),
               child: Row(
                 children: [
+                  if(urlImage1 == null)
                   Container(
                     height:59,
                     width: 59,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image:  DecorationImage(
-                            image: AssetImage("assets/images/ngotruongan.jpg")
+                            image: AssetImage("assets/images/null-user.png")
                         )
                     ),
                   ),
-
+                  if(urlImage1 != null)
+                    Container(
+                      height:59,
+                      width: 59,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image:  DecorationImage(
+                              image: NetworkImage(urlImage1)
+                          )
+                      ),
+                    ),
                   Padding(
                       padding:  EdgeInsets.only(left: 20),
                       child: Column(

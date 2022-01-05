@@ -3,8 +3,9 @@ class UserModel {
   String? email;
   String? firstName;
   String? secondName;
+  String? urlImg;
 
-  UserModel({this.uid, this.email, this.firstName, this.secondName});
+  UserModel({this.uid, this.email, this.firstName, this.secondName, this.urlImg});
 
   // receiving data from server
   factory UserModel.fromMap(map) {
@@ -13,6 +14,7 @@ class UserModel {
       email: map['email'],
       firstName: map['firstName'],
       secondName: map['secondName'],
+        urlImg: map['urlImg']
     );
   }
 
@@ -23,6 +25,12 @@ class UserModel {
       'email': email,
       'firstName': firstName,
       'secondName': secondName,
+    };
+  }
+
+  Map<String, dynamic> toMap2() {
+    return {
+      'urlImg': urlImg,
     };
   }
 }

@@ -37,4 +37,10 @@ class UserProfileModel {
       'image': image
     };
   }
+
+  Map<String, dynamic> toMap1() {
+    return {
+      'image': image
+    };
+  }
 }

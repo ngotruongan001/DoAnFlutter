@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -82,6 +83,7 @@ class _BMIPageState extends State<BMIPage> {
             ),
             SizedBox(height: 35,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
                   children: [
@@ -136,7 +138,7 @@ class _BMIPageState extends State<BMIPage> {
                     ),
                   ],
                 ),
-                SizedBox(width: 10.0,),
+
                 Column(
                   children: [
                     Row(
@@ -198,25 +200,32 @@ class _BMIPageState extends State<BMIPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      "Chiều cao:",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Colors.lightBlueAccent,
-                      ),
-                      textAlign: TextAlign.left,
-                    )
+                    Container(
+                      padding: EdgeInsets.only(left: 20),
+                      child:
+                        Text(
+                          "Chiều cao:",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightBlueAccent,
+                          ),
+                          textAlign: TextAlign.left,
+                        )
+                      ,
+                    ),
                   ],
                 ),
                 SizedBox(height: 10,),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
                       children: [
                         Row(
                           children: [
                             Text(
-                              "centimeter",
+                              "meter",
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.lightBlueAccent,
@@ -260,8 +269,8 @@ class _BMIPageState extends State<BMIPage> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 10,),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Row(
                           children: [
@@ -348,7 +357,7 @@ class _BMIPageState extends State<BMIPage> {
             SizedBox(height: 35,),
             Column(
               children: [
-                Text("Đáp án dưới này", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+                Text("Kết quả:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
                 SizedBox(height: 20,),
                 Row(
                   children: [
